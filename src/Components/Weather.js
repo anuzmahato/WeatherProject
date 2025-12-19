@@ -13,10 +13,17 @@ const Weather = () => {
 
   const API_KEY = "5acc1683650652bab831ecf7d57fd397";
 
-  function handleOnChange(event) {
-    setCity(event.target.value);
-  }
 
+function handleOnChange(event) {
+  const value = event.target.value;
+  setCity(value);
+
+  
+  if (value.trim() === '') {
+    setWeather(null);
+    setError('');
+  }
+}
   async function fetchData() {
     if (!city) {
       setError("Please enter a city name.");
@@ -41,7 +48,7 @@ const Weather = () => {
     }
   }
 
-  // 🌈 Determine background based on weather condition
+  //
   let weatherType = weather?.weather?.[0]?.main?.toLowerCase() || '';
   let backgroundClass = '';
 
